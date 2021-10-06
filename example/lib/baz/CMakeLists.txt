@@ -10,5 +10,4 @@
 
 cc_library(
   NAME baz
-  NAMESPACE ccm::demo  
 )

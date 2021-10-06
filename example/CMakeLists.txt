@@ -8,7 +8,9 @@ include(cc_flink)
 include(cc_module)
 include(CTest)
 
+set(CCM_NAMESPACE ccm::demo)
+
 enable_testing()
 
-add_subdirectory(lib)
 add_subdirectory(main)
+add_subdirectory(lib)

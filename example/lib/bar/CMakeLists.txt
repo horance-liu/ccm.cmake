@@ -36,10 +36,8 @@
 cc_library(
   NAME 
     bar
-  NAMESPACE 
-    ccm::demo
-  PRIVATE_DEPS 
-    ccm::demo::baz
-  PRIVATE_FETURES 
+  DEPS 
+    :baz
+  CFETURES 
     cxx_std_11
 )

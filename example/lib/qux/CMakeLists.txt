@@ -32,8 +32,6 @@
 cc_library(
   NAME 
     qux
-  NAMESPACE 
-    ccm::demo
-  DEPS 
-    ccm::demo::bar
+  DEPS
+    :bar
 )

@@ -20,11 +20,13 @@
 cc_test(
   NAME 
     main
-  NAMESPACE
-    ccm::demo
   DEPS
-    ccm::demo::qux 
-    ccm::demo::foo
+    :qux
 )
 
-# add_test(NAME main COMMAND main)
+cc_flink(
+  NAME
+    main
+  PRIVATE
+    :foo
+)

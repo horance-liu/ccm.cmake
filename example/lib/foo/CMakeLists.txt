@@ -31,11 +31,9 @@
 cc_library(
   NAME 
     foo
-  NAMESPACE
-    ccm::demo
-  PRIVATE_DEPS
-    ccm::demo::bar
-  PRIVATE_FETURES 
+  DEPS
+    :bar
+  CFETURES 
     cxx_std_11
   ALWAYS_LINK
 )
