@@ -15,6 +15,7 @@ cc_test(
     main
   DEPS
     :qux
+  XXX xxx
 )
 
 cc_flink(

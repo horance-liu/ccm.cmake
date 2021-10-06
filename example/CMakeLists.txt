@@ -8,7 +8,7 @@ include(CTest)
 include(cc_flink)
 include(cc_module)
 
-# set(CCM_NAMESPACE ccm::demo)
+set(CCM_NAMESPACE ccm::demo)
 
 enable_testing()
 

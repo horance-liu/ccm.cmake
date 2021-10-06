@@ -1,4 +1,4 @@
-# flink example
+# ccm example
 
 ## Build
 
