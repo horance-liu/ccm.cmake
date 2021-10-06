@@ -4,18 +4,11 @@
 #   PRIVATE qux
 # )
 
-# ERR: no effect
-# target_link_libraries(main
+# target_force_link_libraries(main
 #   PRIVATE foo
 # )
 
-# get_target_property(force_link foo ALWAYS_LINK)
-
-# if (force_link)
-#   target_force_link_libraries(main
-#     PRIVATE foo
-#   )
-# endif()
+# add_test(NAME main COMMAND main)
 
 cc_test(
   NAME 

@@ -1,23 +1,14 @@
-# file(GLOB_RECURSE internal_hdrs CONFIGURE_DEPENDS
-#   include/*.h
-#   include/*.hpp
-#   include/*.hxx
-#   include/*.inc
-# )
-
 # file(GLOB_RECURSE srcs CONFIGURE_DEPENDS
-#   src/*.c
-#   src/*.cc
-#   src/*.cpp
-#   src/*.cxx
+#   *.c
+#   *.cc
+#   *.cpp
+#   *.cxx
 # )
 
 # add_library(foo)
 
 # target_sources(foo
-#   PRIVATE
-#     ${internal_hdrs}
-#     ${srcs}
+#   PRIVATE ${srcs}
 # )
 
 # target_link_libraries(foo
@@ -35,5 +26,4 @@ cc_library(
     :bar
   CFETURES 
     cxx_std_11
-  ALWAYS_LINK
 )

@@ -1,22 +1,8 @@
-include(CMakeParseArguments)
-
-function(ccm_target_name target namespace real_target)
-  string(FIND ${target} ":" idx)
-  
-  if(idx EQUAL 0)
-    if(namespace)
-      string(PREPEND target "${namespace}:")
-    else()
-      string(SUBSTRING ${target} 1 -1 dep)
-    endif()
-  endif()
-
-  set(${real_target} ${target} PARENT_SCOPE)
-endfunction()
+include(cc_flink)
 
 function(ccm_deps target namespace visibility deps)
   foreach(dep IN LISTS deps)
-    ccm_target_name(${dep} ${namespace} real_dep)
+    ccm_get_real_dep_name(${dep} "${namespace}" real_dep)
     target_link_libraries(${target}
       ${visibility} ${real_dep}
     )
@@ -223,7 +209,7 @@ function(cc_library)
       INTERFACE ${public_hdrs}
     )
 
-    if(EXISTS include)
+    if(EXISTS ${local_include})
       target_include_directories(${target}
         INTERFACE include
       )
@@ -263,9 +249,9 @@ function(cc_library)
       )
     endif()    
 
-    if(CC_LIBRARY_INTERFACE_CPATHS)
+    if(CC_LIBRARY_INTERFACE_LPATHS)
       target_link_directories(${target}
-        INTERFACE ${CC_LIBRARY_INTERFACE_CPATHS}
+        INTERFACE ${CC_LIBRARY_INTERFACE_LPATHS}
       )
     endif()
 
@@ -410,15 +396,15 @@ function(cc_library)
     endif()
 
     if(CC_LIBRARY_PUBLIC_DEPS)
-      ccm_deps(${target} ${CC_LIBRARY_NAMESPACE} PUBLIC ${CC_LIBRARY_PUBLIC_DEPS})
+      ccm_deps(${target} "${CC_LIBRARY_NAMESPACE}" PUBLIC ${CC_LIBRARY_PUBLIC_DEPS})
     endif()
 
     if(CC_LIBRARY_PRIVATE_DEPS)
-      ccm_deps(${target} ${CC_LIBRARY_NAMESPACE} PRIVATE ${CC_LIBRARY_PRIVATE_DEPS})
+      ccm_deps(${target} "${CC_LIBRARY_NAMESPACE}" PRIVATE ${CC_LIBRARY_PRIVATE_DEPS})
     endif()    
 
     if(CC_LIBRARY_INTERFACE_DEPS)
-      ccm_deps(${target} ${CC_LIBRARY_NAMESPACE} INTERFACE ${CC_LIBRARY_INTERFACE_DEPS})
+      ccm_deps(${target} "${CC_LIBRARY_NAMESPACE}" INTERFACE ${CC_LIBRARY_INTERFACE_DEPS})
     endif()
 
     if(CC_LIBRARY_ALWAYS_LINK)
@@ -572,7 +558,7 @@ function(cc_binary)
   endif()    
 
   if(CC_BINARY_PRIVATE_DEPS)
-    ccm_deps(${target} ${CC_BINARY_NAMESPACE} PRIVATE ${CC_BINARY_PRIVATE_DEPS})
+    ccm_deps(${target} "${CC_BINARY_NAMESPACE}" PRIVATE ${CC_BINARY_PRIVATE_DEPS})
   endif()
 
   if(CC_BINARY_NAMESPACE)

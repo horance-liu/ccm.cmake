@@ -1,8 +1,15 @@
-# file(GLOB_RECURSE internal_hdrs CONFIGURE_DEPENDS
+# file(GLOB_RECURSE public_hdrs CONFIGURE_DEPENDS
 #   include/*.h
 #   include/*.hpp
 #   include/*.hxx
 #   include/*.inc
+# )
+
+# file(GLOB_RECURSE private_hdrs CONFIGURE_DEPENDS
+#   src/*.h
+#   src/*.hpp
+#   src/*.hxx
+#   src/*.inc
 # )
 
 # file(GLOB_RECURSE srcs CONFIGURE_DEPENDS
@@ -15,8 +22,10 @@
 # add_library(qux)
 
 # target_sources(qux
+#   PUBLIC
+#     ${public_hdrs}
 #   PRIVATE 
-#     ${internal_hdrs} 
+#     ${private_hdrs} 
 #     ${srcs}
 # )
 
@@ -26,7 +35,7 @@
 # )
 
 # target_link_libraries(qux
-#   PUBLIC bar
+#   PRIVATE bar
 # )
 
 cc_library(
